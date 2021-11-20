@@ -7,10 +7,12 @@ const userAuth = require("./routes/userAuth")
 const wishList = require("./routes/wishList")
 require('dotenv').config()
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT ||3000;
 const MONOGODB = process.env.MONGODBURL
 
 app.use(express.json());
+app.use(cors())
 
 
 mongoose
