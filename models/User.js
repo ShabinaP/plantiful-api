@@ -6,6 +6,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: false,
     },
+    name: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -18,7 +22,8 @@ const UserSchema = new mongoose.Schema(
     profileImg: {
       type: String,
       required:false,
-    },
+    }
+
   },
   { timestamps: true }
 );

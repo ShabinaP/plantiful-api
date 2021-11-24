@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Plant = require("../models/Plant");
+const User = require("../models/User");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 //CREATE Plant
 router.post("/add", async (req, res) => {
@@ -66,7 +68,7 @@ router.get("/:user", async (req, res) => {
     }
 });
 
-//GET ALL Plants
+//GET ALL Plants for a specific user
 router.get("/", async (req, res) => {
     const username = req.query.username;
 
@@ -78,6 +80,7 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
+
 
     try {
         let plants;
@@ -93,5 +96,10 @@ router.get("/", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
+
+
+
 
 module.exports = router;
