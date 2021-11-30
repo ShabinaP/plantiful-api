@@ -7,7 +7,6 @@ const userAuth = require("./routes/userAuth")
 const wishList = require("./routes/wishList")
 require('dotenv').config()
 const app = express();
-const cors = require('cors');
 const port = process.env.PORT ||3000;
 const MONOGODB = process.env.MONGODBURL
 const cors = require("cors");
@@ -21,7 +20,7 @@ app.use(cors())
 
 
 mongoose
-  .connect(MONOGODB, {
+  .connect(`mongodb://localhost:27017/plantiful`, {
     useNewUrlParser: true,
    
   })
