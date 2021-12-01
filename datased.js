@@ -3,15 +3,15 @@ const plant = require('./plants.json')
 // Replace the uri string with your MongoDB deployment's connection string.
 require('dotenv').config()
 
-
+const MONGOLOCAL = process.env.MONGOLOCAL
 const MONOGODB = process.env.MONGODBURL
 const uri = MONOGODB;
-const client = new MongoClient(uri);
+const client = new MongoClient(MONGOLOCAL);
 async function run() {
   try {
     await client.connect();
 
-    const database = client.db("myFirstDatabase");
+    const database = client.db("plantiful");
     const foods = database.collection("plants");
 
     // create an array of documents to insert

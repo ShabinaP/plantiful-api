@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require('../models/User');
 const bcrypt = require("bcrypt");
+const Plant = require('../models/Plant')
 
 //GET USER
 router.get("/:id", async (req, res) => {
@@ -60,6 +61,11 @@ router.delete("/:id", async (req, res) => {
         res.status(401).json("You can delete only your account!");
     }
 });
+
+
+
+
+
 
 
 

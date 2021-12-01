@@ -7,12 +7,11 @@ const userAuth = require("./routes/userAuth")
 const wishList = require("./routes/wishList")
 require('dotenv').config()
 const app = express();
-const port = process.env.PORT ||3000;
-const MONOGODB = process.env.MONGODBURL
-const cors = require("cors");
-
+const cors = require('cors');
+const port = process.env.PORT ||5000;
+const MONGOLOCAL = process.env.MONGOLOCAL
+const MONOGODB = process.env.MONGODBURL || "mongodb+srv://muudi:dObmtV3s9ImGf5bF@cluster0.qvyx8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 app.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
-
 app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }))
 
 app.use(express.json());
@@ -20,7 +19,7 @@ app.use(cors())
 
 
 mongoose
-  .connect(`mongodb://localhost:27017/plantiful`, {
+  .connect(MONGOLOCAL, {
     useNewUrlParser: true,
    
   })
