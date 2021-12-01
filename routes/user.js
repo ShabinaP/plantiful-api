@@ -3,7 +3,7 @@ const User = require('../models/User');
 const bcrypt = require("bcrypt");
 const Plant = require('../models/Plant')
 
-//GET USER
+//GET USER works
 router.get("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -16,7 +16,7 @@ router.get("/:id", async (req, res) => {
         res.status(500).json(err);
     }
 });
-//UPDATE USER
+//UPDATE USER works
 router.put("/:id", async (req, res) => {
     if (req.body.userId === req.params.id) {
         if (req.body.password) {
@@ -40,7 +40,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-//DELETE USER
+//DELETE USER this need modification 
 router.delete("/:id", async (req, res) => {
     if (req.body.userId === req.params.id) {
         try {

@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
 //search plant by familyName/ can add more search params  
 router.get('/plantname/:latinname', async (req, res) => {
-    const latinname = req.params.latinname;
+    const latinname = req.params.latinname;  // to get this from body or params
     const result = await Plant.find({
         latinName: new RegExp(latinname, 'i')
     }, )
@@ -28,10 +28,10 @@ router.get('/plantname/:latinname', async (req, res) => {
 })
 
 
-//delete plant from user account (incomplete function)
+//delete plant from user account (works)
 
 router.put('/deleteplant/plant', async (req, res) => {
-    const userid = `61a663a146a4531698aedb62`
+    const userid = `61a663a146a4531698aedb62` // to get this from body or params
     plantid = `61a67737d90627d64e7eeb16`
     const userPlants = await Plant.updateOne({
         _id: plantid
@@ -46,10 +46,10 @@ router.put('/deleteplant/plant', async (req, res) => {
 
 })
 
-//get all plants for one particular user (works)
+//get all plants for one particular user (works)  
 
 router.get("/userplants/user", async (req, res) => {
-    let user = "61a663a146a4531698aedb62"
+    let user = "61a663a146a4531698aedb62"//to get this from body or params
     let plants;
     try {
         plants = await Plant.find({
@@ -66,7 +66,7 @@ router.get("/userplants/user", async (req, res) => {
 
 //push user into  plant array (works)
 router.put('/useraddplant', async (req, res) => {
-    const userid = `61a663a146a4531698aedb62`
+    const userid = `61a663a146a4531698aedb62`  // to get this from body or params
     plantid = `61a67737d90627d64e7eeb18`
     const plant = await Plant.findById(plantid);
     if (plant.userId.includes(userid)) {
