@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -22,7 +24,8 @@ const UserSchema = new mongoose.Schema(
     profileImg: {
       type: String,
       required:false,
-    }
+    },
+    userPlants:[{ type: Schema.Types.ObjectId, ref: "Plant"}],
 
   },
   { timestamps: true }

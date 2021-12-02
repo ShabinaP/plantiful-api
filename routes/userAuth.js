@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-//REGISTER
+//REGISTER works
 router.post("/register", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -22,12 +22,9 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//TESTING
-router.get("/register", async (req,res) => {
-  res.status(200).json("")
-})
 
-//LOGIN
+
+//LOGIN needs modification using JWT authentication
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
