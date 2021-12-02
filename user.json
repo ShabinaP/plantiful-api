@@ -1,0 +1,100 @@
+[
+    {
+        "_id": "61a663a146a4531698aedb5f",
+        "username": "pbickersteth0",
+        "email": "pbickersteth0@sakura.ne.jp",
+        "password": "UBcV65ULu",
+        "name": "Pace Bickersteth",
+        "__v": 4,
+        "updatedAt": "2021-12-02T19:54:55.452Z",
+        "userPlants": [
+            {
+                "_id": "61a67737d90627d64e7eeb15",
+                "PlantId": "562f9027-5852-44bf-badd-6f26063d4a2c",
+                "origin": "Czech Republic",
+                "latinName": "Abies nebrodensis",
+                "familyName": "Poaceae",
+                "childPetSafe": "TRUE",
+                "humidity": "Ut tellus.",
+                "toxicity": "Suspendisse ornare consequat lectus.",
+                "watering": "twice weekly",
+                "airPurifyer": "TRUE",
+                "temperature": 17,
+                "__v": 3,
+                "dislikedBy": [],
+                "dislikes": 0,
+                "likedBy": [],
+                "likes": 0,
+                "updatedAt": "2021-11-30T22:58:47.962Z",
+                "userId": [
+                    "61a663a146a4531698aedb60",
+                    "61a663a146a4531698aedb62"
+                ]
+            },
+            {
+                "_id": "61a67737d90627d64e7eeb16",
+                "PlantId": "b9835f8d-142e-44ab-bfc2-989325d72763",
+                "origin": "Indonesia",
+                "latinName": "Abies sibirica",
+                "familyName": "Apiaceae",
+                "childPetSafe": "TRUE",
+                "humidity": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.",
+                "toxicity": "Etiam vel augue.",
+                "watering": "twice weekly",
+                "airPurifyer": "FALSE",
+                "temperature": 34,
+                "__v": 1,
+                "dislikedBy": [],
+                "dislikes": 0,
+                "likedBy": [],
+                "likes": 0,
+                "updatedAt": "2021-11-30T23:00:49.191Z",
+                "userId": []
+            },
+            {
+                "_id": "61a67737d90627d64e7eeb17",
+                "PlantId": "ad500d28-c831-4efa-be98-e60b6bfad190",
+                "origin": "Indonesia",
+                "latinName": "Acacia baileyana",
+                "familyName": "Polygonaceae",
+                "childPetSafe": "FALSE",
+                "humidity": "Morbi vel lectus in quam fringilla rhoncus.",
+                "toxicity": "Sed vel enim sit amet nunc viverra dapibus.",
+                "watering": "once a month",
+                "airPurifyer": "TRUE",
+                "temperature": 2,
+                "__v": 1,
+                "dislikedBy": [],
+                "dislikes": 0,
+                "likedBy": [],
+                "likes": 0,
+                "updatedAt": "2021-11-30T21:19:15.734Z",
+                "userId": [
+                    "61a663a146a4531698aedb62"
+                ]
+            },
+            {
+                "_id": "61a67737d90627d64e7eeb18",
+                "PlantId": "bc612b7b-61a4-4251-8a9f-04dcc6dffbcb",
+                "origin": "China",
+                "latinName": "Acacia verticillata",
+                "familyName": "Linaceae",
+                "childPetSafe": "TRUE",
+                "humidity": "Praesent lectus.",
+                "toxicity": "Donec dapibus.",
+                "watering": "once a month",
+                "airPurifyer": "FALSE",
+                "temperature": 24,
+                "__v": 1,
+                "dislikedBy": [],
+                "dislikes": 0,
+                "likedBy": [],
+                "likes": 0,
+                "updatedAt": "2021-11-30T21:19:34.029Z",
+                "userId": [
+                    "61a663a146a4531698aedb62"
+                ]
+            }
+        ]
+    }
+]
