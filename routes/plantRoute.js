@@ -7,7 +7,7 @@ const arrayRemover = require("../utils/arrayremove")
 //get all plants from database
 router.get("/", async (req, res) => {
     try {
-        const plant = await Plant.find()
+        const plant = await Plant.find().limit(25)
         res.status(200).json(plant)
 
     } catch (error) {
