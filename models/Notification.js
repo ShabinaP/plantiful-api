@@ -7,12 +7,10 @@ const NotificationSchema = new mongoose.Schema(
   {
     userId: {
       type: { type: Schema.Types.ObjectId, ref: "User"},
-      required: true,
-      unique: true,
-    },
+    
+        },
     plantId: {
       type: { type: Schema.Types.ObjectId, ref: "Plant"},
-      required: true,
     },
     userEmail: {
       type: String,
