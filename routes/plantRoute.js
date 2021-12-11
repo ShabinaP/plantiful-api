@@ -27,6 +27,8 @@ router.get('/plantname/:latinname', async (req, res) => {
     res.status(200).json(result)
 })
 
+
+
 // push plant into user plants array
 //adding plant into user plants collection 
 router.put('/useraddplant', async (req, res) => {

@@ -19,9 +19,8 @@ app.use(cors())
 
 
 mongoose
-  .connect(MONGOLOCAL, {
+  .connect(MONOGODB, {
     useNewUrlParser: true,
-   
   })
   .then(console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
