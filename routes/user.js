@@ -2,7 +2,8 @@ const router = require("express").Router();
 const User = require('../models/User');
 const bcrypt = require("bcrypt");
 const Plant = require('../models/Plant')
-
+const genWebToken = require('../utils/jsonWebToken')
+const Notification = require('../models/Notification')
 //GET USER works
 router.get("/:id", async (req, res) => {
     try {
@@ -18,20 +19,26 @@ router.get("/:id", async (req, res) => {
 });
 //UPDATE USER works
 router.put("/:id", async (req, res) => {
-    if (req.body.userId === req.params.id) {
-        if (req.body.password) {
-            const salt = await bcrypt.genSalt(10);
-            req.body.password = await bcrypt.hash(req.body.password, salt);
-        }
-        try {
-            const updatedUser = await User.findByIdAndUpdate(req.params.id, {$set: req.body,}, { new: true  });
-            res.status(200).json(updatedUser);
-        } catch (err) {
-            res.status(500).json(err);
-        }
-    } else {
-        res.status(401).json("You can update only your account!");
+       const user = await User.findById(req.user._id);
+       if(user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;     
+     
+    if(password.body.password) {
+          user.password =req.body.password;
+      }
+ const updatedUser = await use.save()
+        res.json({ 
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            tokent:genWebToken(updatedUser_.id)
+        })      
     }
+        else {
+            res.status(404)
+            throw new Error("User not found")
+        }
 });
 
 //DELETE USER this need modification 
@@ -40,7 +47,7 @@ router.delete("/:id", async (req, res) => {
         try {
             const user = await User.findById(req.params.id);
             try {
-                await Plant.deleteMany({
+                await Notification.deleteMany({
                     username: user.username
                 });
                 await User.findByIdAndDelete(req.params.id);
