@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Notification = require("../models/Notification")
 const addWeeks = require('date-fns/addWeeks')
+const addMonth = require('date-fns/addMonths')
 const today = new Date()
 const startOfDay = new Date(new Date().setUTCHours(0, 0, 0, 0)).toISOString()
 const endOfDay = new Date(new Date().setUTCHours(23, 59, 59, 999)).toISOString()
@@ -39,9 +40,6 @@ router.get("/weekly", async (req, res) => {
     try {
         const weeklyNotification = await Notification.find({
             $and: [{
-                    frequency: "two weekly"
-                },
-                {
                     status: "dead"
                 },
                 {
@@ -64,14 +62,12 @@ router.get("/weekly", async (req, res) => {
 
 
 })
+
 router.get("/update/weekly", async (req, res) => {
     try {
         const weeklyNotification = await Notification.find({
             $and: [{
-                    frequency: "two weekly"
-                },
-                {
-                    status: "muted"
+                    status: "active"
                 },
                 {
                     nextNotification: {
@@ -80,17 +76,38 @@ router.get("/update/weekly", async (req, res) => {
                     }
                 }
             ]
-        }).updateMany({
+        }).updateMany({},
+            [{
+                $set: {
+                    nextNotification: {
+                        $switch: {
+                            branches: [{
+                                    case: {
+                                        $eq: ["$frequency", 'weekly']
+                                    },
+                                    then: addWeeks(today, 1)
+                                },
+                                {
+                                    case: {
+                                        $eq: ["$frequency", 'two weekly']
+                                    },
+                                    then: addWeeks(today, 2)
+                                },
+                                {
+                                    case: {
+                                        $eq: ["$frequency", 'monthly']
+                                    },
+                                    then: addMonth(today, 1)
+                                }
+                            ],
+                            default: ""
+                        }
+                    }
+                }
+            }]
+        )
 
-            $set: {
-                nextNotification: addWeeks(today, 1),
-                watered: "false",
-                lastNotification: today
-            },
-            $inc: {
-                notificationCount: 1
-            }
-        })
+
         res.status(200).json(weeklyNotification)
 
     } catch (error) {
@@ -136,7 +153,7 @@ router.put("/status/update", async (req, res) => {
     }
     const update = {
         status: notiticationStatus,
-        
+
     }
     try {
         const watered = await Notification.findOneAndUpdate(filter, update)
