@@ -3,9 +3,10 @@ const Plant = require("../models/Plant");
 const User = require("../models/User");
 const ObjectId = require("mongoose").Types.ObjectId;
 const arrayRemover = require("../utils/arrayremove")
+const authenticate = require('../Middleware/authenticator')
 
 //get all plants from database
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     try {
         const plant = await Plant.find().limit(25)
         res.status(200).json(plant)

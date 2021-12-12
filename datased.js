@@ -12,14 +12,15 @@ async function run() {
     await client.connect();
 
     const database = client.db("plantiful");
-    const foods = database.collection("plants");
-
+    const plants = database.collection("plants");
+    const uniqueData = [...plant.reduce((map, obj)=>map.set(obj.latinName, obj), new Map()).values()]
+console.log(uniqueData)
     // create an array of documents to insert
    
     // this option prevents additional documents from being inserted if one fails
     const options = { ordered: true };
 
-    const result = await foods.insertMany(plant, options);
+    const result = await plants.insertMany(uniqueData, options);
     console.log(`${result.insertedCount} documents were inserted`);
   } finally {
     await client.close();

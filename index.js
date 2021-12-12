@@ -5,6 +5,7 @@ const plantRoute = require("./routes/plantRoute");
 const likesRoute = require("./routes/likes");
 const userAuth = require("./routes/userAuth")
 const wishList = require("./routes/wishList")
+const notificationRoute =require("./routes/notification")
 require('dotenv').config()
 const app = express();
 const cors = require('cors');
@@ -16,6 +17,7 @@ app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }))
 const testRoutes = require('./routes/testfile')
 app.use(express.json());
 app.use(cors())
+const authenticate = require('./Middleware/authenticator')
 
 
 mongoose
@@ -32,4 +34,5 @@ app.use("/like", likesRoute)
 app.use('/auth', userAuth)
 app.use("/plants", plantRoute);
 app.use("/test", testRoutes)
+app.use("/notification", notificationRoute)
 
