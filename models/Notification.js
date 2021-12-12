@@ -6,15 +6,15 @@ const Schema = mongoose.Schema;
 const NotificationSchema = new mongoose.Schema(
   {
     userId: {
-      type: { type: Schema.Types.ObjectId, ref: "User"},
+      type: String
     
         },
     plantId: {
-      type: { type: Schema.Types.ObjectId, ref: "Plant"},
+      type: String
     },
     userEmail: {
       type: String,
-      required: true,
+   
     },
     watered: {
       type: Boolean,
@@ -23,11 +23,11 @@ const NotificationSchema = new mongoose.Schema(
 
     wateringCount: {
       type: Number,
-      required: true,
+    
     },
     lastNotification: {
       type: Date,
-      required: true,
+   
     },
     nextNotification: {
       type: Date,
@@ -38,11 +38,11 @@ const NotificationSchema = new mongoose.Schema(
 
     frequency: {
       type: String,
-      required: true,
+     
     },
     plantName: {
       type: String,
-      required: false,
+  
     },
     status: {
       type: String,
