@@ -6,7 +6,7 @@ const arrayRemover = require("../utils/arrayremove")
 const authenticate = require('../Middleware/authenticator')
 
 //get all plants from database
-router.get("/", async (req, res, next) => {
+router.get("/",async (req, res, next) => {
     try {
         const plant = await Plant.find().limit(25)
         res.status(200).json(plant)
@@ -31,8 +31,8 @@ router.get('/plantname/:latinname', async (req, res) => {
 // push plant into user plants array
 //adding plant into user plants collection 
 router.put('/useraddplant', async (req, res) => {
-    const userid = `61a663a146a4531698aedb60`
-    plantid = `61a67737d90627d64e7eeb20`
+    const userid = req.body.userId,
+    plantid = req.body.plantId
 
     const user = await User.findById(userid);
     if (user.userPlants.includes(plantid)) {
@@ -71,13 +71,15 @@ router.put('/useraddplant', async (req, res) => {
 //pulls the plant from the userPlanst array, can remove  several plants at the sametime need to pass as array
 //removes plant from user plants cooolection 
 router.put('/deleteplant', async (req, res) => {
-    const userid = `61a663a146a4531698aedb60` // to get this from body or params
+    const userId = req.body.userId
+    const plantId = req.body.plantId
+    // const userid = `61a663a146a4531698aedb60` // to get this from body or params
     // plantid = [`61a67737d90627d64e7eeb15`,'61a67737d90627d64e7eeb15']
     const userPlants = await User.updateOne({
         _id: userid
     }, {
         $pullAll: {
-            userPlants: [`61a67737d90627d64e7eeb18`,'61a67737d90627d64e7eeb19']
+            userPlants: [plantId]
         }
     });
     res.status(200).json({

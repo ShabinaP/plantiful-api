@@ -9,8 +9,7 @@ router.post("/register", async (req, res) => {
   const {email, password, name} = req.body;
   const CheckUserExists = await User.findOne({email});
   if(CheckUserExists) {
-    // throw new Error("USer already exists")
-    res.status(200).json({message:"user already exists"})
+    throw new Error("USer already exists")
   }
 const user = await User.create({email, password,name})
 if(user) {
@@ -33,7 +32,7 @@ if(user) {
 //LOGIN needs modification using JWT authentication
 router.post("/login", async (req, res) => {
  const {email, password} = req.body;
- const user = await User.findOne({email})
+ const user = await User.findOne({email}).populate('userPlants')
  if(user && (await user.compareUSerPassword(password))) {
    const {password, ...others} =user._doc 
 
@@ -41,6 +40,7 @@ router.post("/login", async (req, res) => {
 
    others,
     token:genWebToken(others),
+    auth:true
   })
 
   }else{
