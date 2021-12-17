@@ -1,40 +1,23 @@
-const axios = require('axios')
+
 require('dotenv').config();
-const nodemailer = require('nodemailer')
-const log = console.log;
+const sgMail = require('@sendgrid/mail')
 
-// Step 1
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.USER || '', // TODO: your gmail account
-        pass: process.env.PASSWORD || '' // TODO: your gmail password
-    }
-});
+const apiKey = process.env.SENDGRID_API_KEY;
+const email = 'jeilani@gmail.com'
 
-// Step 2
-let mailOptions = {
-    from: '', // TODO: email sender
-    to: '', // TODO: email receiver
-    subject: 'Nodemailer - Test',
-    text: 'Wooohooo it works!!'
-};
-
-// Step 3
-transporter.sendMail(mailOptions, (err, data) => {
-    if (err) {
-        return log('Error occurs');
-    }
-    return log('Email sent!!!');
-});
-
-
-
-
-// const emails = await weeklyNotification.map(email => {
-//     return {
-//         email: email.userEmail,
-//         plantName: email.plantName
-//     }
-// })
-// console.log(emails)
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const msg = {
+  to: 'jeilani@gmail.com', // Change to your recipient
+  from: 'info@eastberry.io', // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })

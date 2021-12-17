@@ -6,6 +6,7 @@ const likesRoute = require("./routes/likes");
 const userAuth = require("./routes/userAuth")
 const wishList = require("./routes/wishList")
 const notificationRoute =require("./routes/notification")
+const jwt = require('express-jwt')
 require('dotenv').config()
 const app = express();
 const cors = require('cors');

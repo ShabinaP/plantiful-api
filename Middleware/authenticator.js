@@ -3,16 +3,24 @@ const User = require('../models/User')
 const createError = require('http-errors')
 
 const protectRoute = async(req,res, next) => {
-    if(!req.headers['authorization']) return next(console.log(token))
-    
-    const token = req.headers['authorization'].split(' ')[1]
-    jwt.verify(token, process.env.JWT_SECRET, (err,payload)=>{
-        if(err) {
-            return next(res.status(401).json({message: "ypu are not authorized"}))
-        }
-        req.body = payload
-        next()
-    })
+    let token = req.headers['x-access-token'];
+  
+  if (!token){ 
+    return res.status(403).send({ 
+        auth: false, message: 'No token provided.' 
+      });
+  }
+ 
+  jwt.verify(token, 'SECRET KEY', (err, payload) => {
+    if (err){
+      return res.status(500).send({ 
+          auth: false, 
+          message: 'Fail to Authentication. Error -> ' + err 
+        });
+    }
+    req.body = payload
+    next();
+  });
 
 }
 

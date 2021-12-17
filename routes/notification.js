@@ -40,7 +40,7 @@ router.get("/weekly", async (req, res) => {
     try {
         const weeklyNotification = await Notification.find({
             $and: [{
-                    status: "dead"
+                    status: "active"
                 },
                 {
                     nextNotification: {
@@ -63,7 +63,7 @@ router.get("/weekly", async (req, res) => {
 
 })
 
-router.get("/update/weekly", async (req, res) => {
+router.put("/update/cron-set", async (req, res) => {
     try {
         const weeklyNotification = await Notification.find({
             $and: [{
@@ -77,7 +77,8 @@ router.get("/update/weekly", async (req, res) => {
                 }
             ]
         }).updateMany({},
-            [{
+            
+             [{
                 $set: {
                     nextNotification: {
                         $switch: {
@@ -103,11 +104,20 @@ router.get("/update/weekly", async (req, res) => {
                             default: ""
                         }
                     }
+                     
+
                 }
-            }]
-        )
+              
 
+              
+            }
 
+      
+        ]            
+       
+           
+        )  
+       
         res.status(200).json(weeklyNotification)
 
     } catch (error) {
@@ -156,8 +166,8 @@ router.put("/status/update", async (req, res) => {
 
     }
     try {
-        const watered = await Notification.findOneAndUpdate(filter, update)
-        res.status(200).json(watered)
+        const updatedStatus = await Notification.findOneAndUpdate(filter, update)
+        res.status(200).json(updatedStatus)
 
     } catch (error) {
         return error
