@@ -21,6 +21,7 @@ app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }))
 const testRoutes = require('./routes/testfile')
 app.use(express.json());
 app.use(cors())
+const add = 1
 const authenticate = require('./Middleware/authenticator')
 const mongoConnectionString =NOTIFICATION_CONNECTION ;
 var agenda = new Agenda({
