@@ -1,5 +1,5 @@
 const  {MongoClient} = require('mongodb');
-const plant = require('./plants.json')
+const plant = require('../plants.json')
 // Replace the uri string with your MongoDB deployment's connection string.
 require('dotenv').config()
 

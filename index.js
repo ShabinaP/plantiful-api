@@ -33,7 +33,6 @@ var agenda = new Agenda({
 mongoose
   .connect(MONGOLOCAL, {
     useNewUrlParser: true,
-   
   })
   .then(console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
@@ -48,7 +47,7 @@ app.use("/test", testRoutes)
 app.use("/notification", notificationRoute)
 app.use('/mail', sendMail)
 
-agenda.define("getuserDetails", async (job) => {
+agenda.define("send Emails", async (job) => {
   const data = await axios.get(`https://api.eastberry.io/notification/cron-get`)
   const response = await data.data.data
   const plantDetails = await response.map((plantDetail) => {
@@ -67,5 +66,5 @@ agenda.define("getuserDetails", async (job) => {
 
 (async function () {
   await agenda.start()
-  await agenda.every("2 minutes", "getuserDetails")
+  await agenda.every("2 minutes", "send Emails")
 })()
