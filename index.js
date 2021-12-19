@@ -12,7 +12,7 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT ||9000;
 const MONGOLOCAL = process.env.MONGOLOCAL
-const MONOGODB = process.env.MONGODBURL || "mongodb+srv://muudi:dObmtV3s9ImGf5bF@cluster0.qvyx8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const MONOGODB = process.env.MONGODBURL || ;
 app.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
 app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }))
 const testRoutes = require('./routes/testfile')
