@@ -11,7 +11,7 @@ const protectRoute = async(req,res, next) => {
       });
   }
  
-  jwt.verify(token, 'SECRET KEY', (err, payload) => {
+  jwt.verify(token, 'SECRETKEY', (err, payload) => {
     if (err){
       return res.status(500).send({ 
           auth: false, 
