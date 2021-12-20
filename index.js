@@ -48,7 +48,7 @@ app.use("/notification", notificationRoute)
 app.use('/mail', sendMail)
 
 agenda.define("send Emails", async (job) => {
-  const data = await axios.get(`https://api.eastberry.io/notification/cron-get`)
+  const data = await axios.get(`http:localhost/notification/cron-get`)
   const response = await data.data.data
   const plantDetails = await response.map((plantDetail) => {
     return axios.post("http://localhost:5000/mail/mail", {

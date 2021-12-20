@@ -26,7 +26,7 @@ const axios = require('axios')
 //     domain: DOMAIN
 // });
 // const data = {
-//     from: 'Excited User <info@eastberry.io>',
+//     from: 'Excited User <process.env.SENDER-EMAIL>',
 //     to: 'info@eastberry.io, YOU@YOUR_DOMAIN_NAME',
 //     subject: 'Hello',
 //     text: 'Testing some Mailgun awesomness!'
@@ -93,3 +93,14 @@ userEmails.forEach(element => console.log(element.plantOrigin));
   // .catch(function (error) {
   //   console.log(error);
   // });
+// exports.handler = (event, context, callback) => {
+// sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+// const msg = {
+//     to: "jeilani@gmail.com",
+//     from: "info@eastberry.io",
+//     subject: "test",
+//     text: "test",
+// };
+// sendgrid.send(msg);
+// callback(null, 'Message Sent');
+// }

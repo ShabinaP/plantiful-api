@@ -9,7 +9,7 @@ var agenda = new Agenda({
 });
 
 agenda.define("getuserDetails", async (job) => {
-  const data = await axios.get(`https://api.eastberry.io/notification/cron-get`)
+  const data = await axios.get(`notification enbpoint`)
   const response = await data.data.data
   const plantDetails = await response.map((plantDetail) => {
     return axios.post("http://localhost:5000/mail/mail", {

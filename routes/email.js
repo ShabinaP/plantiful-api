@@ -6,7 +6,7 @@ router.post('/mail', async (req, res, next) => {
   const { recipient, message } = req.body;
   try {
       await sendEmail(recipient, message);
-      res.json({message: 'Your query has been sent'});
+      res.json({message: 'you message has been sent'});
       await next();
      } catch (e) {
       await next(e);
