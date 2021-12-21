@@ -9,7 +9,7 @@ const arrayRemover = require("../utils/arrayremove")
  // fetches user plants from dataase using userPlant array 
  // this same method can be used to fetch user wish list from database
 
-router.get("/userplants/user", async (req, res)=>{
+router.get("/userplants/:userid", async (req, res)=>{
     const userid = "61a663a146a4531698aedb5f" // to come from body or params
     const user = await User.find({_id: userid}).populate('userPlants')
     res.status(200).json(user)
@@ -43,14 +43,14 @@ router.put('/useraddplant', async (req, res) => {
     const user = await User.findById(userid);
     if (user.userPlants.includes(plantid)) {
         res.status(200).json({
-            message: "you have already like this plant int your collection"
+            message: "This plant is already in your collection. "
         })
 
     } else {
         try {
             user.userPlants.push(plantid);
             user.save()
-            res.status(200).json(`Plant added to collection successfully!`)
+            res.status(200).json(`Plant added!`)
 
         } catch (error) {
             res.status(500).json({
