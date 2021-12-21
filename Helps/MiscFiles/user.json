@@ -1,14 +1,7 @@
 [
-    {
-        "_id": "61a663a146a4531698aedb5f",
-        "username": "pbickersteth0",
-        "email": "pbickersteth0@sakura.ne.jp",
-        "password": "UBcV65ULu",
-        "name": "Pace Bickersteth",
-        "__v": 4,
-        "updatedAt": "2021-12-02T19:54:55.452Z",
-        "userPlants": [
-            {
+    
+        
+                {
                 "_id": "61a67737d90627d64e7eeb15",
                 "PlantId": "562f9027-5852-44bf-badd-6f26063d4a2c",
                 "origin": "Czech Republic",
@@ -95,6 +88,6 @@
                     "61a663a146a4531698aedb62"
                 ]
             }
-        ]
-    }
+        
+    
 ]
