@@ -49,7 +49,7 @@ const PlantSchema = new mongoose.Schema(
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
     dislikes: { type: Number, default: 0 },
-    dislikedBy: { type: Array },
+ 
   },
   { timestamps: true }
 );
