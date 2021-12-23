@@ -2,7 +2,7 @@
 // const mailgun = require("mailgun-js");
 // require('dotenv').config()
 // const arrayRemove = function (arr, value) {
-const axios = require('axios')
+// const axios = require('axios')
 //     return arr.filter(function (ele) {
 //         return ele != value;
 //     });
@@ -35,8 +35,8 @@ const axios = require('axios')
 //     console.log(body);
 // });
 // console.log(DOMAIN, API)
- const user = require('../user.json')
-let URLs= ["https://jsonplaceholder.typicode.com/posts/1", "https://jsonplaceholder.typicode.com/posts/2", "https://jsonplaceholder.typicode.com/posts/3"]
+//  const user = require('../user.json')
+// let URLs= ["https://jsonplaceholder.typicode.com/posts/1", "https://jsonplaceholder.typicode.com/posts/2", "https://jsonplaceholder.typicode.com/posts/3"]
 
 // const getAllData = (user){
 //   return   user.map((user)=> {
@@ -52,15 +52,15 @@ let URLs= ["https://jsonplaceholder.typicode.com/posts/1", "https://jsonplacehol
 
 
 
-const userEmails = user.map((user) => {
-    return {
-        plantOrigin: user.origin,
-        plantId: user.PlantId
-    }
-})
+// const userEmails = user.map((user) => {
+//     return {
+//         plantOrigin: user.origin,
+//         plantId: user.PlantId
+//     }
+// })
 
 
-userEmails.forEach(element => console.log(element.plantOrigin));
+// userEmails.forEach(element => console.log(element.plantOrigin));
 
 
 // function fetchData(URL) {
