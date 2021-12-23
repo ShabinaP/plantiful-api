@@ -10,9 +10,9 @@ router.post("/", async (req, res) => {
     const {
         userId,
         plantId,
-        frequency,
-        wateringCount,
+        frequency, 
         plantName,
+        wateringCount,
         nextNotification,
         status,
         userEmail
