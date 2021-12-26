@@ -20,27 +20,6 @@ router.get("/",async (req, res, next) => {
 })
 
 //search plant by familyName/ can add more search params  
-router.get('/plantname/:latinname', async (req, res) => {
-    const latinname = req.params.latinname;  // to get this from body or params
-    const result = await Plant.find({
-        latinName: new RegExp(latinname, 'i')
-    }, )
-    res.status(200).json(result)
-})
-
-
-
-// push plant into user plants array
-//adding plant into user plants collection 
-router.put('/useraddplant', async (req, res) => {
-    const userid = req.body.userId,
-    plantid = req.body.plantId
-
-    const user = await User.findById(userid);
-    if (user.userPlants.includes(plantid)) {
-        res.status(200).json({
-            message: "you have already like this plant int your collection"
-        })
 // router.get('/plantname/:latinname', async (req, res) => {
 //     const latinname = req.params.latinname;  // to get this from body or params
 //     const result = await Plant.find({
