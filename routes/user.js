@@ -7,7 +7,7 @@ const Notification = require('../models/Notification')
 //GET USER works
 router.get("/:id", async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).populate('userPlants');
         const {
             password,
             ...others
@@ -17,6 +17,7 @@ router.get("/:id", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 //UPDATE USER works
 router.put("/:id", async (req, res) => {
        const user = await User.findById(req.user._id);
@@ -40,6 +41,72 @@ router.put("/:id", async (req, res) => {
             throw new Error("User not found")
         }
 });
+// router.get("/user/addplant",async (req, res) => {
+
+//     try {
+//         const plant = await User.findById(req.body.userId)
+//         res.status(200).json(plant)
+
+//     } catch (error) {
+//         res.status(404).json({
+//             message: error.message
+//         })
+//     }
+
+// })
+
+//get all the plants for a particular user 
+
+router.get("user/userplants/:userid", async (req, res)=>{
+    // const userid = `61c61842c7f801a551d411eb` // to come from body or params
+    const user = await User.findById(req.params.userid).populate('userPlants')
+    res.status(200).json(user)
+})
+
+
+
+router.post('/user/addplant', async(req,res)=>{
+    const user= await User.updateOne(
+        {_id:req.body.userId}, {
+            $addToSet: {userPlants: req.body.plantId}
+        }
+    )
+    res.status(200).json(user)
+})
+
+// router.post('/user/addplant', async (req, res) => {
+//     const userid = `61c61842c7f801a551d411eb`
+//     const plantid = `619ec0a055f8e43130103d86`
+//     const user = await User.findById(req.body.userId);
+
+//     if (user.userPlants.includes(req.body.plantId)) {
+//         res.status(200).json({
+//             message: "you have already have this plant int your collection"
+//         })
+
+//     } else {
+//         try {
+//             user.userPlants.push(plantid);
+//             user.save()
+//             res.status(200).json(`Plant added to collection successfully!`)
+
+//         } catch (error) {
+//             res.status(500).json({
+//                 message: "error"
+//             })
+//         }
+//     }
+
+// })findOne
+
+// router.get("/dashboard/:id", async (req, res)=>{
+//     const userId = req.body.id
+//     const user = await User.findById(userId)
+//     res.status(200).json(user)
+// })
+
+
+
 
 //DELETE USER this need modification 
 router.delete("/:id", async (req, res) => {

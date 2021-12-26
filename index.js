@@ -31,7 +31,7 @@ var agenda = new Agenda({
 });
 
 mongoose
-  .connect(MONGOLOCAL, {
+  .connect(MONOGODB, {
     useNewUrlParser: true,
   })
   .then(console.log("Connected to MongoDB"))
@@ -48,7 +48,7 @@ app.use("/notification", notificationRoute)
 app.use('/mail', sendMail)
 
 agenda.define("send Emails", async (job) => {
-  const data = await axios.get(`http:localhost/notification/cron-get`)
+  const data = await axios.get(`http:localhost:5000/notification/cron-get`)
   const response = await data.data.data
   const plantDetails = await response.map((plantDetail) => {
     return axios.post("http://localhost:5000/mail/mail", {
@@ -60,6 +60,8 @@ agenda.define("send Emails", async (job) => {
     })
   })
   await Promise.all(plantDetails)
+  
+ const set = axios.put('/localhost:5000/notification/update/cronset')
 
   console.log(plantDetails)
 });
