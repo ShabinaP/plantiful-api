@@ -7,13 +7,17 @@ const startOfDay = new Date(new Date().setUTCHours(0, 0, 0, 0)).toISOString()
 const endOfDay = new Date(new Date().setUTCHours(23, 59, 59, 999)).toISOString()
 
 router.post("/", async (req, res) => {
+    let nextNotification = req.body.nextNotification
+    let frequency= req.body.frequency
+    nextNotification = (frequency === "Weekly") ? addWeeks(today, 1) :
+    (frequency === "Twice Weekly") ? addWeeks(today, 2) :
+    addMonth(today, 1)
+
     const {
         userId,
         plantId,
-        frequency, 
         plantName,
         wateringCount,
-        nextNotification,
         status,
         userEmail
     } = req.body
@@ -63,7 +67,7 @@ router.get("/weekly", async (req, res) => {
 
 })
 
-router.put("/update/cron-set", async (req, res) => {
+router.put("/update/cronset", async (req, res) => {
     try {
         const weeklyNotification = await Notification.find({
             $and: [{
@@ -128,12 +132,10 @@ router.put("/update/cron-set", async (req, res) => {
 })
 
 // update watered field  from user end(front end)
-router.get("/watered", async (req, res) => {
-    const userId = req.body.userId
-    const plantId = req.body.plantId
+router.put("/watered", async (req, res) => {
     const filter = {
-        userId: userId,
-        plantId: plantId
+        userId: req.body.userId,
+        plantId: req.body.plantId
     }
     const update = {
         watered: "true",
@@ -147,7 +149,6 @@ router.get("/watered", async (req, res) => {
 
     } catch (error) {
         return error
-
     }
 })
 
@@ -155,14 +156,13 @@ router.get("/watered", async (req, res) => {
 router.put("/status/update", async (req, res) => {
     const userId = req.body.userId
     const plantId = req.body.plantId
-    const notiticationStatus = req.body.status
     const filter = {
         userId: userId,
         plantId: plantId
 
     }
     const update = {
-        status: notiticationStatus,
+        status: "dead",
 
     }
     try {

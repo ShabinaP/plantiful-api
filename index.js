@@ -27,11 +27,11 @@ app.use(cors())
 const add = 1
 const authenticate = require('./Middleware/authenticator')
 const mongoConnectionString =NOTIFICATION_CONNECTION ;
-// var agenda = new Agenda({
-//   db: {
-//     address: mongoConnectionString
-//   }
-// });
+var agenda = new Agenda({
+  db: {
+    address: mongoConnectionString
+  }
+});
 
 mongoose
   .connect(MONOGODB, {
@@ -50,24 +50,39 @@ app.use("/test", testRoutes)
 app.use("/notification", notificationRoute)
 app.use('/mail', sendMail)
 
-// agenda.define("send Emails", async (job) => {
-//   const data = await axios.get(`http:localhost/notification/cron-get`)
-//   const response = await data.data.data
-//   const plantDetails = await response.map((plantDetail) => {
-//     return axios.post("http://localhost:5000/mail/mail", {
-//       recipient: plantDetail.userEmail,
-//       message: {
-//         subject: plantDetail.plantName,
-//         text: `its that of the week, you need to water plant ${plantDetail.plantName}`
-//       }
-//     })
-//   })
-//   await Promise.all(plantDetails)
+agenda.define("send Emails", async (job) => {
+  const data = await axios.get(`http:localhost/notification/cron-get`)
+  const response = await data.data.data
+  const plantDetails = await response.map((plantDetail) => {
+    return axios.post("http://localhost:5000/mail/mail", {
+      recipient: plantDetail.userEmail,
+      message: {
+        subject: plantDetail.plantName,
+        text: `its that of the week, you need to water plant ${plantDetail.plantName}`
+      }
+    })
+  })
+  await Promise.all(plantDetails)
+agenda.define("send Emails", async (job) => {
+  const data = await axios.get(`http:localhost:5000/notification/cron-get`)
+  const response = await data.data.data
+  const plantDetails = await response.map((plantDetail) => {
+    return axios.post("http://localhost:5000/mail/mail", {
+      recipient: plantDetail.userEmail,
+      message: {
+        subject: plantDetail.plantName,
+        text: `its that of the week, you need to water plant ${plantDetail.plantName}`
+      }
+    })
+  })
+  await Promise.all(plantDetails)
+  
+ const set = axios.put('/localhost:5000/notification/update/cronset')
 
-//   console.log(plantDetails)
-// });
+  console.log(plantDetails)
+});
 
-// (async function () {
-//   await agenda.start()
-//   await agenda.every("2 minutes", "send Emails")
-// })()
+(async function () {
+  await agenda.start()
+  await agenda.every("2 minutes", "send Emails")
+})()
